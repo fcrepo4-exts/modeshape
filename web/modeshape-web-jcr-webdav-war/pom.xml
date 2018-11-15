@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.modeshape</groupId>
+        <groupId>org.fcrepo</groupId>
         <artifactId>modeshape-parent</artifactId>
-        <version>5.4.1.Final</version>
+        <version>5.4.1.fcr</version>
         <relativePath>../../modeshape-parent</relativePath>
     </parent>
     <artifactId>modeshape-web-jcr-webdav-war</artifactId>
@@ -15,7 +15,7 @@
     <url>http://www.modeshape.org</url>
     <dependencies>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-web-jcr-webdav</artifactId>
         </dependency>
         
@@ -44,14 +44,14 @@
       
         <!--  TESTING DEPENDENCIES -->
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-webdav-war</artifactId>
             <scope>test</scope>
             <type>test-jar</type>
         </dependency>
 
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-common</artifactId>
             <scope>test</scope>
             <type>test-jar</type>
@@ -68,7 +68,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jcr</artifactId>
         </dependency>
     </dependencies>

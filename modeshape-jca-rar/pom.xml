@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.modeshape</groupId>
+        <groupId>org.fcrepo</groupId>
         <artifactId>modeshape-parent</artifactId>
-        <version>5.4.1.Final</version>
+        <version>5.4.1.fcr</version>
         <relativePath>../modeshape-parent/pom.xml</relativePath>
     </parent>
 
@@ -19,7 +19,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jca</artifactId>
         </dependency>
     </dependencies>

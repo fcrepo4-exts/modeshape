@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.modeshape</groupId>
+        <groupId>org.fcrepo</groupId>
         <artifactId>modeshape-parent</artifactId>
-        <version>5.4.1.Final</version>
+        <version>5.4.1.fcr</version>
         <relativePath>../modeshape-parent/pom.xml</relativePath>
     </parent>
 
@@ -26,15 +26,15 @@
             <artifactId>jcr</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jcr-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jdbc-local</artifactId>
         </dependency>
         <dependency>
@@ -53,25 +53,25 @@
         Testing (note the scope)
         -->
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-common</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jcr</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jcr</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-schematic</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
@@ -79,14 +79,14 @@
         </dependency>
         
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jdbc-local</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-web-jcr-rest-war</artifactId>
             <type>war</type>
             <scope>test</scope>
@@ -183,7 +183,7 @@
                     <deployables>
                         <!-- application to deploy (brought in as a transitive dependency of modeshape-rest-client -->
                         <deployable>
-                            <groupId>org.modeshape</groupId>
+                            <groupId>org.fcrepo</groupId>
                             <artifactId>modeshape-web-jcr-rest-war</artifactId>
                             <type>war</type>
                             <properties>

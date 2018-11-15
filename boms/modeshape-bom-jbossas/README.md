@@ -33,7 +33,7 @@ For example, if your module uses the JCR API and the ModeShape public API (which
       <dependencies>
         ...
         <dependency>
-          <groupId>org.modeshape</groupId>
+          <groupId>org.fcrepo</groupId>
           <artifactId>modeshape-jcr-api</artifactId>
         </dependency>
         ...

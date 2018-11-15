@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.modeshape</groupId>
+        <groupId>org.fcrepo</groupId>
         <artifactId>modeshape-index-providers</artifactId>
-        <version>5.4.1.Final</version>
+        <version>5.4.1.fcr</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <!-- The groupId and version values are inherited from parent -->
@@ -36,7 +36,7 @@
             Required to text FTS on binary properties...
         -->
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-extractor-tika</artifactId>
             <scope>test</scope>
         </dependency>

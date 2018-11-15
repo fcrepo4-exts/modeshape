@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.modeshape</groupId>
+        <groupId>org.fcrepo</groupId>
         <artifactId>modeshape-parent</artifactId>
-        <version>5.4.1.Final</version>
+        <version>5.4.1.fcr</version>
         <relativePath>../../modeshape-parent</relativePath>
     </parent>
 
@@ -16,15 +16,15 @@
     <url>http://www.modeshape.org</url>
     <dependencies>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jcr-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-web-jcr</artifactId>
         </dependency>
         <dependency>
@@ -76,7 +76,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jcr</artifactId>
             <scope>test</scope>
         </dependency>

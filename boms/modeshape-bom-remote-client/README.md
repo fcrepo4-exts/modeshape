@@ -31,7 +31,7 @@ For example, if your module _explicitly_ uses ModeShape's REST client library, t
       <dependencies>
         ...
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jdbc</artifactId>
         </dependency>
         ...

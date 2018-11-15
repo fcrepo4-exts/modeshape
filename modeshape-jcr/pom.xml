@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.modeshape</groupId>
+        <groupId>org.fcrepo</groupId>
         <artifactId>modeshape-parent</artifactId>
-        <version>5.4.1.Final</version>
+        <version>5.4.1.fcr</version>
         <relativePath>../modeshape-parent/pom.xml</relativePath>
     </parent>
 
@@ -24,23 +24,23 @@
     <dependencies>
         <!-- Public API (beyond JCR 2.0) -->
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-jcr-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-schematic</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-persistence-relational</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-persistence-file</artifactId>
         </dependency>
         <!--Event bus clustering. Note the scope in the parent (provided) - this should be optional from a MS perspective -->
@@ -150,13 +150,13 @@
 
         <!--  Used in tests -->
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-common</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.modeshape</groupId>
+            <groupId>org.fcrepo</groupId>
             <artifactId>modeshape-schematic</artifactId>
             <type>test-jar</type>
             <scope>test</scope>

@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.modeshape</groupId>
+        <groupId>org.fcrepo</groupId>
         <artifactId>modeshape-parent</artifactId>
-        <version>5.4.1.Final</version>
+        <version>5.4.1.fcr</version>
         <relativePath>../modeshape-parent/pom.xml</relativePath>
     </parent>
 
@@ -26,7 +26,7 @@
 
             <dependencies>
                 <dependency>
-                    <groupId>org.modeshape</groupId>
+                    <groupId>org.fcrepo</groupId>
                     <artifactId>modeshape-jdbc</artifactId>
                     <version>${project.version}</version>
                     <classifier>jar-with-dependencies</classifier>
@@ -49,7 +49,7 @@
                                     <artifactItems>
                                         <!-- Copy the jdbc jar with dependencies to a temporary location, which will be then processed by ANT -->
                                         <artifactItem>
-                                            <groupId>org.modeshape</groupId>
+                                            <groupId>org.fcrepo</groupId>
                                             <artifactId>modeshape-jdbc</artifactId>
                                             <version>${project.version}</version>
                                             <classifier>jar-with-dependencies</classifier>
