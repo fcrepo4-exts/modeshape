@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.fcrepo</groupId>
         <artifactId>modeshape-parent</artifactId>
-        <version>5.4.1.fcr</version>
+        <version>5.4.1.fcr-SNAPSHOT</version>
         <relativePath>../../modeshape-parent</relativePath>
     </parent>
     <artifactId>modeshape-web-explorer</artifactId>
