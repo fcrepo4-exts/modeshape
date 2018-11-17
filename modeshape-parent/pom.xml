@@ -694,9 +694,46 @@
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>
+
             </plugins>
         </pluginManagement>
         <plugins>
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                  <linksource>true</linksource>
+                  <quiet>true</quiet>
+                </configuration>
+                <executions>
+                  <execution>
+                    <id>attach-javadocs</id>
+                    <goals>
+                      <goal>jar</goal>
+                      <goal>javadoc</goal>
+                    </goals>
+                  </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+              <artifactId>maven-gpg-plugin</artifactId>
+              <version>1.6</version>
+              <executions>
+                <execution>
+                  <id>sign-artifacts</id>
+                  <phase>verify</phase>
+                  <goals>
+                    <goal>sign</goal>
+                  </goals>
+                </execution>
+              </executions>
+              <configuration>
+                <useAgent>true</useAgent>
+              </configuration>
+            </plugin>
+
             <!-- Specify the compiler options and settings -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
