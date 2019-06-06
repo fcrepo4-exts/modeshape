@@ -15,7 +15,7 @@
  */
 package org.modeshape.jcr.value.binary;
 
-import java.io.IOException;
+import java.io.File;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Date;
@@ -27,12 +27,19 @@ import javax.jcr.RepositoryException;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.S3ClientOptions;
 import com.amazonaws.services.s3.iterable.S3Objects;
 import com.amazonaws.services.s3.model.CopyObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
+import com.amazonaws.services.s3.transfer.Upload;
+
 import org.modeshape.common.logging.Logger;
 import org.modeshape.jcr.JcrI18n;
 import org.modeshape.jcr.value.BinaryKey;
@@ -48,7 +55,12 @@ public class S3BinaryStore extends AbstractBinaryStore {
     /*
      * AWS client which provides access to Amazon S3
      */
-    private AmazonS3Client s3Client = null;
+    private AmazonS3 s3Client = null;
+
+    /*
+     * AWS transfer manager to handle multipart uploads
+     */
+    private TransferManager transferManager;
 
     /*
      * Temporary local file cache to allow for checksum computation
@@ -92,13 +104,23 @@ public class S3BinaryStore extends AbstractBinaryStore {
      * @throws BinaryStoreException if S3 connection cannot be made to verify bucket
      */
     public S3BinaryStore(String accessKey, String secretKey, String bucketName, String endPoint) throws BinaryStoreException {
+        if (accessKey == null || secretKey == null) {
+            this.s3Client = AmazonS3ClientBuilder.defaultClient();
+        } else {
+            this.s3Client = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey));
+        }
+
         this.bucketName = bucketName;
-        this.s3Client = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey));
 
+        S3ClientOptions.Builder optionsBuilder = S3ClientOptions.builder();
         // Support for compatible S3 storage systems
-        if(endPoint != null)
+        if (endPoint != null && endPoint != "") {
             this.s3Client.setEndpoint(endPoint);
+            optionsBuilder.setPathStyleAccess(true);
+        }
+        this.s3Client.setS3ClientOptions(optionsBuilder.build());
 
+        this.transferManager = TransferManagerBuilder.standard().withS3Client(s3Client).build();
         this.fileSystemCache = TransientBinaryStore.get();
         this.fileSystemCache.setMinimumBinarySizeInBytes(1L);
 
@@ -118,10 +140,12 @@ public class S3BinaryStore extends AbstractBinaryStore {
      *
      * @param bucketName Name of the S3 bucket in which binary content will be stored
      * @param s3Client Client for communicating with Amazon S3
+     * @param transferManager TransferManager for handling multipart uploads
      */
-    protected S3BinaryStore(String bucketName, AmazonS3Client s3Client) {
+    protected S3BinaryStore(String bucketName, AmazonS3 s3Client, TransferManager transferManager) {
         this.bucketName = bucketName;
         this.s3Client = s3Client;
+        this.transferManager = transferManager;
         this.fileSystemCache = TransientBinaryStore.get();
         this.fileSystemCache.setMinimumBinarySizeInBytes(1L);
     }
@@ -154,13 +178,11 @@ public class S3BinaryStore extends AbstractBinaryStore {
     }
 
     @Override
-    public void storeExtractedText(BinaryValue binaryValue, String extractedText)
-        throws BinaryStoreException {
+    public void storeExtractedText(BinaryValue binaryValue, String extractedText) throws BinaryStoreException {
         // User defined metadata for S3 objects cannot exceed 2KB
         // This checks for the absolute top of that range
-        if(extractedText.length() > 2000) {
-            throw new BinaryStoreException("S3 objects cannot store associated data " +
-                                           "that is larger than 2KB");
+        if (extractedText.length() > 2000) {
+            throw new BinaryStoreException("S3 objects cannot store associated data " + "that is larger than 2KB");
         }
 
         setS3ObjectUserProperty(binaryValue.getKey(), EXTRACTED_TEXT_KEY, extractedText);
@@ -210,25 +232,19 @@ public class S3BinaryStore extends AbstractBinaryStore {
 
             // If file is NOT already in S3 storage, store it
             if(!s3Client.doesObjectExist(bucketName, key.toString())) {
-                ObjectMetadata metadata = new ObjectMetadata();
-                // Set Mimetype
-                metadata.setContentType(fileSystemCache.getMimeType(cachedFile, key.toString()));
-                // Set Unused value
-                Map<String, String> userMetadata = metadata.getUserMetadata();
-                userMetadata.put(UNUSED_KEY, String.valueOf(markAsUnused));
-                metadata.setUserMetadata(userMetadata);
+                File uploadSource = fileSystemCache.findFile(fileSystemCache.getDirectory(), key, false);
                 // Store content in S3
-                s3Client.putObject(bucketName, key.toString(), fileSystemCache.getInputStream(key), metadata);
+                Upload upload = this.transferManager.upload(bucketName, key.toString(), uploadSource);
+                upload.waitForCompletion();
+            }
+            // Set the unused value, if necessary
+            if (markAsUnused) {
+                markAsUnused(Collections.singleton(key));
             } else {
-                // Set the unused value, if necessary
-                if(markAsUnused) {
-                    markAsUnused(Collections.singleton(key));
-                } else {
-                    markAsUsed(Collections.singleton(key));
-                }
+                markAsUsed(Collections.singleton(key));
             }
             return new StoredBinaryValue(this, key, cachedFile.getSize());
-        } catch (AmazonClientException|RepositoryException |IOException e) {
+        } catch (AmazonClientException | RepositoryException | InterruptedException e) {
             throw new BinaryStoreException(e);
         } finally {
             // Remove cached file
