@@ -28,11 +28,14 @@ import java.util.concurrent.TimeUnit;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CopyObjectRequest;
+import com.amazonaws.services.s3.model.CopyObjectResult;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.Upload;
 import com.amazonaws.util.IOUtils;
 import com.amazonaws.util.StringInputStream;
 import org.easymock.Capture;
@@ -75,8 +78,14 @@ public class S3BinaryStoreTest extends EasyMockSupport {
     @Mock
     private ObjectListing objectListing;
 
+    @Mock
+    private TransferManager s3TransferManager;
+
+    @Mock
+    private Upload s3Upload;
+    
     @TestSubject
-    private S3BinaryStore s3BinaryStore = new S3BinaryStore(BUCKET, s3Client);
+    private S3BinaryStore s3BinaryStore = new S3BinaryStore(BUCKET, s3Client, s3TransferManager);
 
     @After
     public void tearDown() {
@@ -184,25 +193,28 @@ public class S3BinaryStoreTest extends EasyMockSupport {
         assertEquals(extractedText, extractValue);
     }
 
+    private void prepareStorageStubs(boolean exists, boolean markAsUnused) throws BinaryStoreException {
+        expect(s3Client.doesObjectExist(eq(BUCKET), isA(String.class))).andReturn(exists);
+        expect(s3Client.copyObject(isA(CopyObjectRequest.class))).andStubReturn(new CopyObjectResult());
+        expect(s3Client.getObjectMetadata(eq(BUCKET), isA(String.class)))
+                .andStubReturn(new ObjectMetadata());
+    }
+
     /*
      * Tests storing new content
      */
     @Test
-    public void testStoreValue() throws BinaryStoreException, UnsupportedEncodingException {
+    public void testStoreValue() throws BinaryStoreException, UnsupportedEncodingException, InterruptedException {
         String valueToStore = "value-to-store";
 
-        expect(s3Client.doesObjectExist(eq(BUCKET), isA(String.class))).andReturn(false);
-        Capture<ObjectMetadata> objMetaCapture = Capture.newInstance();
-        expect(s3Client.putObject(eq(BUCKET), isA(String.class),
-                                  isA(InputStream.class), capture(objMetaCapture)))
-            .andReturn(null);
-
+        prepareStorageStubs(false, false);
+        expect(s3TransferManager.upload(eq(BUCKET), isA(String.class), isA(java.io.File.class))).andReturn(s3Upload);
+        s3Upload.waitForCompletion();
+        
         replayAll();
 
-        s3BinaryStore.storeValue(new StringInputStream(valueToStore), false);
-        ObjectMetadata objMeta = objMetaCapture.getValue();
-        assertEquals(String.valueOf(false),
-                     objMeta.getUserMetadata().get(s3BinaryStore.UNUSED_KEY));
+        BinaryValue result = s3BinaryStore.storeValue(new StringInputStream(valueToStore), false);
+        assertEquals(result.getKey().toString(), "aca65037bfb8a99b77c1b68c5ecd9ecbd2ca9c77");
     }
 
     /*
@@ -210,25 +222,14 @@ public class S3BinaryStoreTest extends EasyMockSupport {
      * markAsUnread property is made.
      */
     @Test
-    public void testStoreValueExisting() throws BinaryStoreException, IOException {
+    public void testStoreValueExisting() throws BinaryStoreException, UnsupportedEncodingException, InterruptedException {
         String valueToStore = "value-to-store";
 
-        expect(s3Client.doesObjectExist(eq(BUCKET), isA(String.class))).andReturn(true);
-        expect(s3Client.getObjectMetadata(eq(BUCKET), isA(String.class)))
-            .andReturn(new ObjectMetadata());
-        ObjectMetadata objMeta = new ObjectMetadata();
-        Map<String, String> userMeta = new HashMap<>();
-        userMeta.put(s3BinaryStore.UNUSED_KEY, String.valueOf(true));
-        objMeta.setUserMetadata(userMeta);
-        Capture<CopyObjectRequest> copyRequestCapture = Capture.newInstance();
-        expect(s3Client.copyObject(capture(copyRequestCapture))).andReturn(null);
-
+        prepareStorageStubs(true, true);
         replayAll();
 
-        s3BinaryStore.storeValue(new StringInputStream(valueToStore), true);
-        ObjectMetadata newObjMeta = copyRequestCapture.getValue().getNewObjectMetadata();
-        assertEquals(String.valueOf(true),
-                     newObjMeta.getUserMetadata().get(s3BinaryStore.UNUSED_KEY));
+        BinaryValue result = s3BinaryStore.storeValue(new StringInputStream(valueToStore), true);
+        assertEquals(result.getKey().toString(), "aca65037bfb8a99b77c1b68c5ecd9ecbd2ca9c77");
     }
 
     @Test
