@@ -2725,8 +2725,10 @@ public class NodeTypes {
             if (defn != null) return defn;
             if (additionalTypes != null) {
                 for (JcrNodeType additionalType : additionalTypes) {
-                    defn = childDefinitionSatisfies(additionalType, childType, childName, skipProtected, true, matches);
-                    if (defn != null) return defn;
+                    if (additionalType != null) {
+                        defn = childDefinitionSatisfies(additionalType, childType, childName, skipProtected, true, matches);
+                        if (defn != null) return defn;
+                    }
                 }
             }
             // Then check for child node defns that match by name and type but that do not allow SNS ...
