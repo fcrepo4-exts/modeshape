@@ -41,6 +41,8 @@ import org.modeshape.common.annotation.Immutable;
 import org.modeshape.common.collection.HashMultimap;
 import org.modeshape.common.collection.Multimap;
 import org.modeshape.common.i18n.I18n;
+import org.modeshape.common.i18n.TextI18n;
+import org.modeshape.common.logging.Logger;
 import org.modeshape.common.util.CheckArg;
 import org.modeshape.jcr.cache.NodeKey;
 import org.modeshape.jcr.cache.SiblingCounter;
@@ -51,6 +53,7 @@ import org.modeshape.jcr.value.StringFactory;
 
 @Immutable
 public class NodeTypes {
+    protected final Logger logger = Logger.getLogger(NodeTypes.class);
 
     public static interface Supplier {
         /**
@@ -2728,6 +2731,9 @@ public class NodeTypes {
                     if (additionalType != null) {
                         defn = childDefinitionSatisfies(additionalType, childType, childName, skipProtected, true, matches);
                         if (defn != null) return defn;
+                    } else {
+                        logger.warn(new TextI18n("Encountered null additionalType definition for node with primary type {0} and additional types {1}"),
+                                primaryType, additionalTypes);
                     }
                 }
             }
