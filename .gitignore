@@ -11,6 +11,7 @@ target
 /.metadata
 /.recommenders
 /RemoteSystemsTempFiles
+.checkstyle
 
 # ignore overlay folders
 overlays
