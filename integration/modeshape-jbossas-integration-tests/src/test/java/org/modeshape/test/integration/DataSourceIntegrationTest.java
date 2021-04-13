@@ -16,13 +16,16 @@
 package org.modeshape.test.integration;
 
 import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 import java.sql.Connection;
+
 import javax.annotation.Resource;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.sql.DataSource;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ArchivePaths;
@@ -66,8 +69,8 @@ public class DataSourceIntegrationTest {
         File[] testDeps = Maven.configureResolver()
                                .workOffline()
                                .loadPomFromFile("pom.xml")
-                               .resolve("org.modeshape:modeshape-jdbc-local",
-                                        "org.modeshape:modeshape-jdbc-local:test-jar:tests:?")                 
+                               .resolve("org.fcrepo:modeshape-jdbc-local",
+                                        "org.fcrepo:modeshape-jdbc-local:test-jar:tests:?")
                                .withTransitivity()
                                .asFile();
         return ShrinkWrap.create(WebArchive.class, "ds-test.war")

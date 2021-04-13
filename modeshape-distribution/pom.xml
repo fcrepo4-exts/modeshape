@@ -260,14 +260,14 @@
                             <failOnError>true</failOnError>
                             <dependencySourceIncludes>
                                 <!-- We only want JavaDoc for the modules with a groupId of "org.modeshape" -->
-                                <dependencySourceInclude>org.modeshape:*</dependencySourceInclude>
+                                <dependencySourceInclude>org.fcrepo:*</dependencySourceInclude>
                             </dependencySourceIncludes>
                             <dependencySourceExcludes>
                                 <!-- But want to exclude certain artifacts and modules -->
-                                <dependencySourceExclude>org.modeshape:modeshape-integration-tests:*</dependencySourceExclude>
-                                <dependencySourceExclude>org.modeshape:modeshape-jbossas-integration-tests:*</dependencySourceExclude>
-                                <dependencySourceExclude>org.modeshape:*:test:*</dependencySourceExclude>
-                                <dependencySourceExclude>org.modeshape:modeshape-client:*</dependencySourceExclude>
+                                <dependencySourceExclude>org.fcrepo:modeshape-integration-tests:*</dependencySourceExclude>
+                                <dependencySourceExclude>org.fcrepo:modeshape-jbossas-integration-tests:*</dependencySourceExclude>
+                                <dependencySourceExclude>org.fcrepo:*:test:*</dependencySourceExclude>
+                                <dependencySourceExclude>org.fcrepo:modeshape-client:*</dependencySourceExclude>
                             </dependencySourceExcludes>
 
                             <links>

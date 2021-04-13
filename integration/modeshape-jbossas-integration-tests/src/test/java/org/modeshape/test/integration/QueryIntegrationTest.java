@@ -16,10 +16,12 @@
 package org.modeshape.test.integration;
 
 import java.io.File;
+
 import javax.annotation.Resource;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ArchivePaths;
@@ -48,13 +50,13 @@ public class QueryIntegrationTest {
     private Session session;
     private Node testRoot;
     private boolean print;
-   
+
     @Deployment
     public static WebArchive createDeployment() {
         File[] testDeps = Maven.configureResolver()
                 .workOffline()
                 .loadPomFromFile("pom.xml")
-                .resolve("org.modeshape:modeshape-jcr:test-jar:tests:?").withTransitivity().asFile();
+                .resolve("org.fcrepo:modeshape-jcr:test-jar:tests:?").withTransitivity().asFile();
 
         return ShrinkWrap.create(WebArchive.class, "query-test.war").addAsLibraries(testDeps)
                 .addAsWebInfResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"))
@@ -104,7 +106,7 @@ public class QueryIntegrationTest {
         node2.addMixin("mix:title");
         node2.setProperty("jcr:title", "title_2");
         session.save();
-     
+
         String sql = "select [jcr:path] from [mix:title] where [jcr:title] LIKE 'ti%'";
         Query query = session.getWorkspace().getQueryManager().createQuery(sql, Query.JCR_SQL2);
         validateQuery().rowCount(2).hasNodesAtPaths("/root/node1", "/root/node2").useIndex("titles").validate(query, query.execute());

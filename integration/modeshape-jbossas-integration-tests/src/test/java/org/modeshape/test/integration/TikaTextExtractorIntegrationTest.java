@@ -17,12 +17,15 @@ package org.modeshape.test.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.modeshape.jcr.ValidateQuery.validateQuery;
+
 import java.io.File;
 import java.io.InputStream;
+
 import javax.annotation.Resource;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ArchivePaths;
@@ -55,7 +58,7 @@ public class TikaTextExtractorIntegrationTest {
         File[] testDeps = Maven.configureResolver()
                                .workOffline()
                                .loadPomFromFile("pom.xml")
-                               .resolve("org.modeshape:modeshape-jcr:test-jar:tests:?").withTransitivity().asFile();
+                               .resolve("org.fcrepo:modeshape-jcr:test-jar:tests:?").withTransitivity().asFile();
 
         return ShrinkWrap.create(WebArchive.class, "tika-extractor-test.war")
                          .addAsLibraries(testDeps)
@@ -66,7 +69,7 @@ public class TikaTextExtractorIntegrationTest {
 
     @Resource( mappedName = "/jcr/query" )
     private JcrRepository repository;
-   
+
     @Before
     public void beforeEach() throws Exception {
         session = repository.login("default");
