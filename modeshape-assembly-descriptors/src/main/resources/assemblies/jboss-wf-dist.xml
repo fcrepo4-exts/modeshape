@@ -93,7 +93,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/schematic/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-schematic:jar</include>
+                <include>org.fcrepo:modeshape-schematic:jar</include>
             </includes>
             <unpack>false</unpack>
         </dependencySet>
@@ -103,7 +103,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/persistence/relational/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-persistence-relational:jar</include>
+                <include>org.fcrepo:modeshape-persistence-relational:jar</include>
                 <include>com.zaxxer:HikariCP:jar</include>
             </includes>
         </dependencySet>
@@ -113,7 +113,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/persistence/file/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-persistence-file:jar</include>
+                <include>org.fcrepo:modeshape-persistence-file:jar</include>
                 <include>com.h2database:h2:jar</include>
             </includes>
         </dependencySet>
@@ -123,7 +123,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/jcr/api/main</outputDirectory>
 			<includes>
-				<include>org.modeshape:modeshape-jcr-api:jar</include>
+				<include>org.fcrepo:modeshape-jcr-api:jar</include>
 			</includes>
 			<unpack>false</unpack>
 		</dependencySet>
@@ -133,7 +133,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/common/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-common:jar</include>
+                <include>org.fcrepo:modeshape-common:jar</include>
             </includes>
             <unpack>false</unpack>
         </dependencySet>
@@ -143,8 +143,8 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-jcr:jar</include>
-                <include>org.modeshape:modeshape-jbossas-subsystem:jar</include>
+                <include>org.fcrepo:modeshape-jcr:jar</include>
+                <include>org.fcrepo:modeshape-jbossas-subsystem:jar</include>
                 <include>org.mapdb:mapdb:jar</include>
                 <include>com.github.ben-manes.caffeine:caffeine:jar</include>
             </includes>
@@ -184,7 +184,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/connector/git/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-connector-git:jar</include>
+                <include>org.fcrepo:modeshape-connector-git:jar</include>
                 <include>org.eclipse.jgit:org.eclipse.jgit:jar</include>
                 <include>com.jcraft:jsch:jar</include>
                 <include>com.googlecode.javaewah:JavaEWAH:jar</include>
@@ -195,7 +195,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/connector/jdbc/metadata/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-connector-jdbc-metadata:jar</include>
+                <include>org.fcrepo:modeshape-connector-jdbc-metadata:jar</include>
             </includes>
         </dependencySet>
 
@@ -205,7 +205,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/ddl/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-ddl:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-ddl:jar</include>
             </includes>
         </dependencySet>
 
@@ -213,7 +213,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/image/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-images:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-images:jar</include>
                 <include>com.drewnoakes:metadata-extractor:jar</include>
                 <include>com.adobe.xmp:xmpcore:jar</include>
             </includes>
@@ -224,7 +224,7 @@
             <outputDirectory>modules/org/modeshape/sequencer/java/main</outputDirectory>
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-java:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-java:jar</include>
                 <include>org.javassist:javassist:jar</include>
                 <include>org.eclipse*:common:jar:${version.org.eclipse.equinox.common}</include>
                 <include>org.eclipse*:core:jar:${version.org.eclipse.jdt.core}</include>
@@ -243,7 +243,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/mp3/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-mp3:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-mp3:jar</include>
                 <include>org:jaudiotagger:jar</include>
             </includes>
         </dependencySet>
@@ -252,7 +252,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/audio/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-audio:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-audio:jar</include>
                 <include>org:jaudiotagger:jar</include>
             </includes>
         </dependencySet>
@@ -261,7 +261,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/epub/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-epub:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-epub:jar</include>
             </includes>
         </dependencySet>   
         
@@ -269,7 +269,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/odf/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-odf:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-odf:jar</include>
                 <include>xerces:xercesImpl:jar</include>
                 <include>org.odftoolkit:odfdom-java:jar</include>
                 <include>org.odftoolkit:simple-odf:jar</include>
@@ -280,7 +280,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/msoffice/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-msoffice:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-msoffice:jar</include>
                 <include>org.apache*:poi:jar</include>
                 <include>org.apache*:poi-scratchpad:jar</include>
             </includes>
@@ -290,7 +290,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/sramp/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-sramp:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-sramp:jar</include>
             </includes>
         </dependencySet>
 
@@ -298,7 +298,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/text/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-text:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-text:jar</include>
             </includes>
         </dependencySet>
 
@@ -306,7 +306,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/wsdl/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-wsdl:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-wsdl:jar</include>
                 <include>wsdl4j:wsdl4j:jar</include>
             </includes>
         </dependencySet>
@@ -315,7 +315,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/xml/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-xml:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-xml:jar</include>
             </includes>
         </dependencySet>
 
@@ -323,7 +323,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/xsd/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-xsd:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-xsd:jar</include>
                 <include>org.eclipse*:xsd:jar:${version.org.eclipse.xsd}</include>
                 <include>org.eclipse*:common:jar:${version.org.eclipse.emf.common}</include>
                 <include>org.eclipse*:ecore:jar:${version.org.eclipse.emf.ecore}</include>
@@ -336,7 +336,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/zip/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-zip:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-zip:jar</include>
             </includes>
         </dependencySet>
 
@@ -344,7 +344,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/video/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-video:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-video:jar</include>
                 <include>io.humble:humble-video-all:jar</include>
             </includes>
         </dependencySet>
@@ -353,7 +353,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/pdf/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-pdf:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-pdf:jar</include>
                 <include>org.apache.pdfbox:pdfbox:jar</include>
                 <include>org.apache.pdfbox:xmpbox:jar</include>
                 <include>commons-logging:commons-logging:jar</include>
@@ -364,7 +364,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/audio/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-audio:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-audio:jar</include>
                 <include>org:jaudiotagger:jar</include>
             </includes>
         </dependencySet>
@@ -372,7 +372,7 @@
         <dependencySet>
             <outputDirectory>modules/org/modeshape/sequencer/epub/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-epub:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-epub:jar</include>
             </includes>
         </dependencySet>
 
@@ -380,7 +380,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/sequencer/odf/main</outputDirectory>
             <includes>
-                <include>org.modeshape:modeshape-sequencer-odf:jar</include>
+                <include>org.fcrepo:modeshape-sequencer-odf:jar</include>
                 <include>org.odftoolkit:odfdom-java:jar</include>
                 <include>org.odftoolkit:simple-odf:jar</include>
             </includes>
@@ -391,7 +391,7 @@
             <outputDirectory>modules/org/modeshape/extractor/tika/main</outputDirectory>
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <includes>
-                <include>org.modeshape:modeshape-extractor-tika:jar</include>
+                <include>org.fcrepo:modeshape-extractor-tika:jar</include>
             </includes>
         </dependencySet>
 
@@ -400,7 +400,7 @@
             <outputDirectory>modules/org/modeshape/index-provider/lucene/main</outputDirectory>
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <includes>
-                <include>org.modeshape:modeshape-lucene-index-provider:jar</include>
+                <include>org.fcrepo:modeshape-lucene-index-provider:jar</include>
                 <include>org.apache.lucene:*:jar</include>
             </includes>
         </dependencySet>
@@ -410,7 +410,7 @@
             <outputDirectory>modules/org/modeshape/index-provider/elasticsearch/main</outputDirectory>
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <includes>
-                <include>org.modeshape:modeshape-elasticsearch-index-provider:jar</include>
+                <include>org.fcrepo:modeshape-elasticsearch-index-provider:jar</include>
             </includes>
         </dependencySet>
 
@@ -419,7 +419,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>modules/org/modeshape/jdbc/main</outputDirectory>
 			<includes>
-				<include>org.modeshape:modeshape-jdbc-local:jar</include>
+				<include>org.fcrepo:modeshape-jdbc-local:jar</include>
 			</includes>
 			<unpack>false</unpack>
 		</dependencySet>

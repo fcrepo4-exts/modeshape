@@ -17,10 +17,12 @@ package org.modeshape.test.integration;
 
 import java.io.File;
 import java.io.InputStream;
+
 import javax.annotation.Resource;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
+
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.NodeBuilder;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -62,7 +64,7 @@ public class EsIndexIntegrationTest {
         File[] testDeps = Maven.configureResolver()
                 .workOffline()
                 .loadPomFromFile("pom.xml")
-                .resolve("org.modeshape:modeshape-jcr:test-jar:tests:?").withTransitivity().asFile();
+                .resolve("org.fcrepo:modeshape-jcr:test-jar:tests:?").withTransitivity().asFile();
 
         ClassLoader cl = EsIndexIntegrationTest.class.getClassLoader();
         return ShrinkWrap.create(WebArchive.class, "query-test.war").addAsLibraries(testDeps)
