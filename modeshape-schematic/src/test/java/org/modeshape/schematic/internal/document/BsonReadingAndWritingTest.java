@@ -18,6 +18,7 @@ package org.modeshape.schematic.internal.document;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,6 +39,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
+
 import org.bson.BSONObject;
 import org.bson.BasicBSONCallback;
 import org.bson.BasicBSONDecoder;
@@ -45,7 +47,6 @@ import org.bson.BasicBSONEncoder;
 import org.bson.BasicBSONObject;
 import org.bson.types.BSONTimestamp;
 import org.bson.types.BasicBSONList;
-import org.codehaus.jackson.JsonToken;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -62,6 +63,8 @@ import org.modeshape.schematic.document.Symbol;
 import org.modeshape.schematic.document.Timestamp;
 import org.modeshape.schematic.internal.annotation.FixFor;
 import org.modeshape.schematic.internal.io.BufferCache;
+
+import com.fasterxml.jackson.core.JsonToken;
 
 public class BsonReadingAndWritingTest {
 
