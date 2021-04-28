@@ -227,11 +227,13 @@ public final class SharedLockingInputStream extends InputStream {
     @Override
     public void reset() throws IOException {
         doOperation(() -> {
+            boolean newStream = false;
             if (markZero) {
                 close();
+                newStream = true;
             }
             open();
-            if (markZero) {
+            if (markZero || newStream) {
                 markZero = false;
             } else if (stream.markSupported()) {
                 stream.reset();

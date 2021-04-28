@@ -76,13 +76,13 @@ public class ExcelMetadataReader {
                      *  combining the body text from all worksheets into a single string.
                      */
                     switch (cell.getCellType()) {
-                        case HSSFCell.CELL_TYPE_STRING:
+                        case STRING:
                             buff.append(cell.getRichStringCellValue().getString());
                             break;
-                        case HSSFCell.CELL_TYPE_NUMERIC:
+                        case NUMERIC:
                             buff.append(cell.getNumericCellValue());
                             break;
-                        case HSSFCell.CELL_TYPE_FORMULA:
+                        case FORMULA:
                             buff.append(cell.getCellFormula());
                             break;
                     }
