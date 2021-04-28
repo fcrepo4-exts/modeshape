@@ -60,7 +60,6 @@ import org.modeshape.jcr.security.AnonymousProvider;
 import org.modeshape.jcr.security.JaasProvider;
 import org.modeshape.jcr.txn.DefaultTransactionManagerLookup;
 import org.modeshape.jcr.value.PropertyType;
-import org.modeshape.jcr.value.binary.AbstractBinaryStore;
 import org.modeshape.jcr.value.binary.BinaryStore;
 import org.modeshape.jcr.value.binary.BinaryStoreException;
 import org.modeshape.jcr.value.binary.CassandraBinaryStore;
@@ -438,6 +437,7 @@ public class RepositoryConfiguration {
         public static final String PORT = "port";
         public static final String BUCKET_NAME = "bucketName";
         public static final String ENDPOINT_URL = "endPoint";
+        public static final String DELETE_UNUSED_NATIVELY = "deleteUnusedNatively";
 
         public static final String GARBAGE_COLLECTION = "garbageCollection";
         public static final String INITIAL_TIME = "initialTime";
@@ -1211,14 +1211,8 @@ public class RepositoryConfiguration {
                 String password = binaryStorage.getString(FieldName.USER_PASSWORD);
                 String bucketName = binaryStorage.getString(FieldName.BUCKET_NAME);
                 String endPoint = binaryStorage.getString(FieldName.ENDPOINT_URL);
-
-                //Use S3 provided endpoints
-                if (endPoint != null) {
-                    store = new S3BinaryStore(username, password, bucketName, endPoint);
-                }
-                else { //Use default AWS endpoint
-                    store = new S3BinaryStore(username, password, bucketName);
-                }
+                Boolean deleteUnusedNatively = binaryStorage.getBoolean(FieldName.DELETE_UNUSED_NATIVELY);
+                store = new S3BinaryStore(username, password, bucketName, endPoint, deleteUnusedNatively);
             }
 
             if (store == null) store = TransientBinaryStore.get();
@@ -1244,9 +1238,9 @@ public class RepositoryConfiguration {
         /*
          * Instantiates custom binary store.
          */
-        private AbstractBinaryStore createInstance() throws Exception {
+        private BinaryStore createInstance() throws Exception {
             ClassLoader classLoader = environment().getClassLoader(this, classPath);
-            return (AbstractBinaryStore)classLoader.loadClass(classname).newInstance();
+            return classLoader.loadClass(classname).asSubclass(BinaryStore.class).newInstance();
         }
 
         @SuppressWarnings( "synthetic-access" )

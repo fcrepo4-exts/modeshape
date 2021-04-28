@@ -102,8 +102,8 @@ public class ImageMetadataSequencer extends Sequencer {
                                                   Binary binaryValue,
                                                   boolean imageParsedUsingDefaultMetadata ) throws Exception {
         try (InputStream stream = binaryValue.getStream()) {
-            Metadata advancedMetadata = ImageMetadataReader.readMetadata(new BufferedInputStream(stream), false);
-            ExifIFD0Directory exifIFD0Directory = advancedMetadata.getDirectory(ExifIFD0Directory.class);
+            Metadata advancedMetadata = ImageMetadataReader.readMetadata(new BufferedInputStream(stream));
+            ExifIFD0Directory exifIFD0Directory = advancedMetadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
             if (exifIFD0Directory == null || !hasTags(exifIFD0Directory, EXIF_TAGS)) {
                 if (!imageParsedUsingDefaultMetadata) {
                     getLogger().info("Neither default nor advanced metadata parser can resolve image. Ignoring sequencing");

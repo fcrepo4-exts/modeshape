@@ -32,7 +32,7 @@ public class AnnotationMetadata {
     AnnotationMetadata( Annotation annotation ) {
         this.annotationClassName = annotation.getTypeName();
 
-        Set<Object> memberNames = annotation.getMemberNames();
+        Set<String> memberNames = annotation.getMemberNames();
         if (memberNames != null) {
             Map<String, String> members = new HashMap<String, String>(memberNames.size());
 
