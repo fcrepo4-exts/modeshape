@@ -217,6 +217,19 @@
         <skipLongRunningTests>true</skipLongRunningTests>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jboss-third-party</id>
+            <name>JBoss Third Party Releases</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
+        </repository>
+        <repository>
+            <id>redhat-ga</id>
+            <name>Redhat GA Repository</name>
+            <url>https://maven.repository.redhat.com/ga/</url>
+        </repository>
+    </repositories>
+
     <profiles>
 
         <!--
